@@ -9,6 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    //lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1)/ 2) --> wouldn't work
+    
+    //lazy will remove the error of using "cardButtons" before initializing it
+    //one restrictions: you can't add a "did set"
+    
+    //classes get a free init with no arguemnts as long as their vars are initialized
+    
     var flipCount = 0 {
         didSet {
             //property observer
