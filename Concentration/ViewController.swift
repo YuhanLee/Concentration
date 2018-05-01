@@ -9,25 +9,40 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var flipCount = 0
+    var flipCount = 0 {
+        didSet {
+            //property observer
+            flipCountLabel.text = "Flips: \(flipCount)"
+        }
+    }
+    
     //no need to do flipCount: Int = 0 as Swift is strongly typed..
     //hold option to check type for flipCount
     
     @IBOutlet weak var flipCountLabel: UILabel!
     //"!" is... TBA
     
+    @IBOutlet var cardButtons: [UIButton]!
+    //same as Array<UIButton>
+    //Cmd + click you get a manual to rename...
+    //Never rename a value because all UI is connected
+    
+    var emojiChoices = ["🎃", "👻", "🎃", "👻"]
+    //Array<String> is not necessary....so we ignore
+    
     @IBAction func touchCard(_ sender: UIButton) {
         // "_" means that there are no args
         flipCount += 1
-        flipCard(withEmoji: "👻", on: sender)
-    }
-    
-    @IBAction func touchSecondCard(_ sender: UIButton) {
-        flipCount += 1
-        flipCard(withEmoji: "🎃", on: sender)
+        //let cardNumber = cardButtons.index(of: sender) --> not set
+        //let cardNumber = cardButtons.index(of: sender)! --> will give error if card not in cardButton
 
+        if let cardNumber = cardButtons.index(of: sender) {
+            print("cardNumber = \(cardNumber)")
+            flipCard(withEmoji: emojiChoices[cardNumber], on: sender)
+        } else {
+            print("chosen card was not in cardButton")
+        }
     }
-    
     
     func flipCard ( withEmoji emoji: String, on button: UIButton) {
         //Each argument has a name. Both internal and external names
