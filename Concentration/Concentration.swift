@@ -15,7 +15,26 @@ class Concentration
     
     //creating instance of a class
     var cards = [Card]()
+    
+    var indexOfOneAndOnlyFaceUpCard: Int?
+    //This should be a type optional. Could be nil sometimes
+    
     func chooseCard(at index: Int) {
+        
+        //3 scenarios
+        //1. no cards faced up
+        //2. 2 cards faced up--> need to flip 2 back
+        //3. 1 card faced up--> now we need to check if match
+        if !cards[index].isMatched{
+            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
+                //check if cards match
+            } else {
+                //either no cards or 2 cards are face up
+            }
+        } else {
+            
+        }
+        
     }
     
     init(numberOfPairsOfCards: Int) {
