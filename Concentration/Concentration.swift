@@ -10,33 +10,22 @@ import Foundation
 
 class Concentration
 {
-    //Think: what is its public API for the methods
-    //We want to design the methods first because we have to be clear about what we need this class for
     
-    //creating instance of a class
+    private var themeList:[Theme] = []
+
     var cards = [Card]()
-    
     var indexOfOneAndOnlyFaceUpCard: Int?
-    //If no card faced up, this will be "not set"
-    
-    
-    /* 3 scenarios
-     1. no cards faced up
-     2. 2 cards faced up--> need to flip 2 back
-     3. 1 card faced up--> now we need to check if match */
     
     func chooseCard(at index: Int) {
-        if !cards[index].isMatched { //ignoring all matched cards
-            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index { //checking if can match
-                // check if cards match
+        if !cards[index].isMatched {
+            if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 if cards[matchIndex].identifier == cards[index].identifier {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched = true
                 }
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
-                
-            } else { // either no card or two cards face up
+            } else {
                 for flipdownIndex in cards.indices {
                     cards[flipdownIndex].isFaceUp = false
                 }
@@ -47,15 +36,20 @@ class Concentration
     }
     
     init(numberOfPairsOfCards: Int) {
+        var notShuffledCards = [Card]()
         for _ in 1...numberOfPairsOfCards {
-            let card = Card()
-            cards += [card, card]
+            let card = Card() //intializing one
+            notShuffledCards += [card, card] //add a pair in the collection
         }
-        
-        //         let matchingCard = card
-        //            //putting in a card in an array also does copy
-        //            cards.append(card)
-        //            cards.append(matchingCard)
-        //TODO: shuffle the card
+        for _ in notShuffledCards {
+            let randomCardIndex = Int(arc4random_uniform(UInt32(notShuffledCards.count)))
+            let randomCard = notShuffledCards.remove(at: randomCardIndex)
+            cards.append(randomCard)
+        }
     }
 }
+
+/* Concept: Struct -is a valut etype so it's supposed to be immutable
+ But if we make a struct a var instead of a constant to use the mutating function, ti could work
+ */
+
