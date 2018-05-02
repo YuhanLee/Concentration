@@ -39,6 +39,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		616402B0209A5DCA00E753E2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6172B85C2097A3DE00E54B88 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		616402B1209A5DEF00E753E2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				61EE6BA42098DA04005FB653 /* Card.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		6172B84E2097A3DE00E54B88 = {
 			isa = PBXGroup;
 			children = (
@@ -59,9 +75,9 @@
 			isa = PBXGroup;
 			children = (
 				61EE6BA22098D986005FB653 /* Concentration.swift */,
-				61EE6BA42098DA04005FB653 /* Card.swift */,
+				616402B1209A5DEF00E753E2 /* Model */,
 				6172B86C2097EBEB00E54B88 /* Supporting Files */,
-				6172B85C2097A3DE00E54B88 /* ViewController.swift */,
+				616402B0209A5DCA00E753E2 /* Controller */,
 				6172B85E2097A3DE00E54B88 /* Main.storyboard */,
 				6172B8662097A3E000E54B88 /* Info.plist */,
 			);

@@ -24,14 +24,11 @@ struct Card {
     
     static func getUniqueIdentifier() -> Int {
         identifierFactory += 1
-        //is a static var
-
         return identifierFactory
     }
     
     init() {
         self.identifier = Card.getUniqueIdentifier()
         //init tend to have same internal/ external names
-
     }
 }

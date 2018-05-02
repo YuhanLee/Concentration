@@ -12,10 +12,8 @@ class ViewController: UIViewController {
     
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     //lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1)/ 2) --> wouldn't work
-    
     //lazy will remove the error of using "cardButtons" before initializing it
     //one restrictions: you can't add a "did set"
-    
     //classes get a free init with no arguemnts as long as their vars are initialized
     
     var flipCount = 0 {
@@ -23,6 +21,14 @@ class ViewController: UIViewController {
             //property observer
             flipCountLabel.text = "Flips: \(flipCount)"
         }
+    }
+    
+    
+    func setTheme() {
+        //TODO: implement this method
+    }
+    func updateView() {
+        //TODO: implement this method
     }
     
     //no need to do flipCount: Int = 0 as Swift is strongly typed..
@@ -43,11 +49,8 @@ class ViewController: UIViewController {
         //let cardNumber = cardButtons.index(of: sender)! --> will give error if card not in cardButton
 
         if let cardNumber = cardButtons.index(of: sender) {
-            print("cardNumber = \(cardNumber)")
-            flipCard(withEmoji: emojiChoices[cardNumber], on: sender)
-            
-            
             game.chooseCard(at: cardNumber)
+            updateViewFromModel()
         } else {
             print("chosen card was not in cardButton")
         }
@@ -58,6 +61,7 @@ class ViewController: UIViewController {
             //for index in 0...CardButtons
             let button = cardButtons[index]
             let card = game.cards[index]
+                    
             if card.isFaceUp {
                 button.setTitle(emoji(for: card), for: UIControlState.normal)
                 button.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
@@ -69,38 +73,21 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["🎃", "👻", "👿", "👺", "👽", "🤡", "👹", "🤖", "👾"]
+    var emojiChoices = ["🎃", "👻", "👿", "👺", "👽", "🤡", "👹", "🤖", "👾", "🧠", "😽", "💀"]
     //Array<String> is not necessary....so we ignore
 
     var emoji = [Int: String]()
     //This is a dictionary struct --> "var emoji = Dictionary<Int,String>()" would work too
-
+    
+    
     func emoji(for card: Card) -> String {
-    //        if emoji[card.identifier] != nil {
-    //            return emoji[card.identifier]!
-    //        } else {
-    //            return "?"
-    //        }
-        //is same as:
-        if emoji[card.identifier] == nil {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            // arc4random only works for signed in. Swift doesn't do automatically typed
-            // then we convert it again to Int for the random index
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex) //we remove it so emoji won't be repeated
+        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
+            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count - 1)))
+            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
         }
         return emoji[card.identifier] ?? "?"
     }
-    
-    
-    func flipCard ( withEmoji emoji: String, on button: UIButton) {
-        //Each argument has a name. Both internal and external names
-        //withEmoji is external, emoji is internal
-        
-        if button.currentTitle == emoji {
-            
-        } else {
-           
-        }
-    }
+    // arc4random only works for signed in. Swift doesn't do automatically typed
+    // then we convert it again to Int for the random index
 }
 
