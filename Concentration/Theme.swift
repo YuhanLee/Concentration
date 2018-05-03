@@ -12,4 +12,7 @@ struct Theme {
     var cardCoverColor: UIColor
     var gameBackgroundColor: UIColor
     var cardTitles: [String]
+    
 }
+
+
